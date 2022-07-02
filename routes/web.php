@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group([
+    'prefix' => 'app',
+    'middleware' => ['auth:sanctum'],
+    'namespace' => 'App\Http\Controllers\Application'
+], function() {
+    Route::get('/', 'DashboardController');
 });
+
+Route::get('/{any}', function () {
+    return view('app');
+})->where('any', '.*');
