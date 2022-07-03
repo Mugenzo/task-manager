@@ -13,10 +13,12 @@ const routes = [
     },
     {
         name: 'dashboard',
+        path: '',
         component: DefaultLayout,
         children: [
             {
                 path: '/',
+                name: '',
                 component: Dashboard
             }
         ]
