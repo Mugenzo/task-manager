@@ -24,6 +24,8 @@ class AuthenticationController extends Controller
             ]);
         }
 
-        return $user->createToken($request->device_name)->plainTextToken;
+        $api_key = $user->createToken('website')->plainTextToken;
+
+        return response()->json(compact('user', 'api_key'));
     }
 }

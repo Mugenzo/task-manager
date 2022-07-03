@@ -4,7 +4,7 @@
             <v-form @submit.prevent="auth(form)">
                 <v-card class="elevation-12">
                     <v-toolbar color="primary">
-                        <v-toolbar-title>Login form</v-toolbar-title>
+                        <v-toolbar-title>Registration form</v-toolbar-title>
                     </v-toolbar>
                     <v-card-text>
 
@@ -45,7 +45,7 @@
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="primary" type="submit" v-text="'Login'" variant="outlined"/>
+                        <v-btn color="primary" type="submit" v-text="'Register'" variant="outlined"/>
                     </v-card-actions>
                 </v-card>
             </v-form>
@@ -56,8 +56,10 @@
 <script setup lang="ts">
 import {reactive} from "vue";
 import {useStore} from "vuex";
+import {useRouter} from "vue-router";
 
 const store = useStore()
+const router = useRouter()
 
 const form = reactive({
     email: null,
@@ -73,10 +75,17 @@ const errors = reactive({
 })
 
 const auth = (data) => {
+    Object.assign(errors, {
+        email: [],
+        nickname: [],
+        password: [],
+        password_confirmation: [],
+    })
+
     const response = store.dispatch('user/register', data)
 
     response.then(res => {
-        console.log(res)
+        router.push('dashboard')
     }).catch(_errors => {
         Object.assign(errors, _errors.errors)
     })
