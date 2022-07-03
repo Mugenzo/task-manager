@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es2018",
+        "sourceMap": true,
+        "paths": {
+            "@/*": ["resources/js/*"]
+        }
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}

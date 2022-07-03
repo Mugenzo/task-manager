@@ -5,13 +5,12 @@ import routes from "./routes";
 
 const router = createRouter({
     history: createWebHistory(),
-    routes
+    routes: routes
 })
 
-router.beforeEach(async (to, from) => {
-    if (!isAuthenticated && to.name !== 'Login') {
-        return {name: 'Login'}
-    }
+router.beforeEach((to, from, next) => {
+    if (to.name !== 'login' && !isAuthenticated()) next({ name: 'login' })
+    else next()
 })
 
 const initRouter = (app) => {
