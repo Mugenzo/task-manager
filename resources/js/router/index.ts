@@ -9,7 +9,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    if (to.name !== 'login' && !isAuthenticated()) next({ name: 'login' })
+    if (!['login', 'register'].includes(to.name) && !isAuthenticated()) next({name: 'login'})
     else next()
 })
 

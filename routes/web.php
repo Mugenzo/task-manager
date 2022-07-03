@@ -13,12 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/auth', [\App\Http\Controllers\Auth\AuthenticationController::class, 'authenticate']);
+Route::post('/register', [\App\Http\Controllers\Auth\RegistrationController::class, 'register']);
+
 Route::group([
-    'prefix' => 'app',
-    'middleware' => ['auth:sanctum'],
     'namespace' => 'App\Http\Controllers\Application'
-], function() {
-    Route::get('/', 'DashboardController');
+], function () {
+    Route::group([
+        'prefix' => 'app',
+        'middleware' => ['auth:sanctum'],
+    ], function () {
+        Route::get('/', 'DashboardController');
+    });
 });
 
 Route::get('/{any}', function () {

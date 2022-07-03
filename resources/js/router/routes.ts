@@ -1,25 +1,23 @@
-// User part
-const DefaultLayout = () => import('@/views/layouts/Default.vue')
-const Dashboard = () => import('@/views/pages/Dashboard.vue')
-
-// Guest part
-const Login = () => import('@/views/auth/Login.vue')
-
 const routes = [
     {
         name: 'login',
         path: '/login',
-        component: Login
+        component: () => import('@/views/auth/Login.vue')
+    },
+    {
+        name: 'register',
+        path: '/register',
+        component: () => import('@/views/auth/Registration.vue')
     },
     {
         name: 'dashboard',
         path: '',
-        component: DefaultLayout,
+        component: () => import('@/views/layouts/Default.vue'),
         children: [
             {
                 path: '/',
                 name: '',
-                component: Dashboard
+                component: () => import('@/views/pages/Dashboard.vue')
             }
         ]
     }

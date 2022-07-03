@@ -10,11 +10,19 @@
 
                         <v-text-field
                             prepend-icon="person"
-                            name="login"
-                            label="Login"
+                            name="Email"
+                            label="Email"
                             type="text"
                             v-model="form.email"
                             :error-messages="errors.email"
+                        ></v-text-field>
+                        <v-text-field
+                            prepend-icon="person"
+                            name="Nickname"
+                            label="Nickname"
+                            type="text"
+                            v-model="form.nickname"
+                            :error-messages="errors.nickname"
                         ></v-text-field>
                         <v-text-field
                             id="password"
@@ -25,7 +33,15 @@
                             v-model="form.password"
                             :error-messages="errors.password"
                         ></v-text-field>
-
+                        <v-text-field
+                            id="password_confirmation"
+                            prepend-icon="lock"
+                            name="password_confirmation"
+                            label="Confirm password"
+                            type="password"
+                            v-model="form.password_confirmation"
+                            :error-messages="errors.password_confirmation"
+                        ></v-text-field>
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
@@ -45,15 +61,19 @@ const store = useStore()
 
 const form = reactive({
     email: null,
-    password: null
+    nickname: null,
+    password: null,
+    password_confirmation: null
 })
 const errors = reactive({
     email: [],
-    password: []
+    nickname: [],
+    password: [],
+    password_confirmation: [],
 })
 
 const auth = (data) => {
-    const response = store.dispatch('user/authorise', data)
+    const response = store.dispatch('user/register', data)
 
     response.then(res => {
         console.log(res)
@@ -62,7 +82,3 @@ const auth = (data) => {
     })
 }
 </script>
-
-<style scoped>
-
-</style>

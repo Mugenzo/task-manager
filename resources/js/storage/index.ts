@@ -1,10 +1,12 @@
 import {createStore} from "vuex";
 
-import application from "./modules/application";
+import application from "@/storage/modules/application";
+import user from "@/storage/modules/user";
 
 const store = createStore({
     modules: {
-        application
+        application,
+        user
     }
 })
 
