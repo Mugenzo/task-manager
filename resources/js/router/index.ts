@@ -3,13 +3,14 @@ import isAuthenticated from "../middlewares/isAuth";
 
 import routes from "./routes";
 
-const router = createRouter({
+export const router = createRouter({
     history: createWebHistory(),
     routes
 })
 
 router.beforeEach((to, from, next) => {
-    if (!['login', 'register'].includes(to.name) && !isAuthenticated()) next({name: 'login'})
+    let name = String(to.name);
+    if (!['login', 'register'].includes(name) && !isAuthenticated()) next({name: 'login'})
     else next()
 })
 

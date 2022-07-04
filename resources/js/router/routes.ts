@@ -10,14 +10,18 @@ const routes = [
         component: () => import('@/views/auth/Registration.vue')
     },
     {
-        name: 'dashboard',
-        path: '',
+        path: '/',
         component: () => import('@/views/layouts/Default.vue'),
         children: [
             {
-                path: '/',
-                name: '',
+                path: '',
+                name: 'dashboard',
                 component: () => import('@/views/pages/Dashboard.vue')
+            },
+            {
+                path: '/users',
+                name: 'users.index',
+                component: () => import('@/views/pages/Users.vue')
             }
         ]
     }

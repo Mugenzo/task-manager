@@ -27,6 +27,5 @@ class RegistrationController extends Controller
         $api_key = $user->createToken('app')->plainTextToken;
 
         return response()->json(compact('user', 'api_key'));
-
     }
 }

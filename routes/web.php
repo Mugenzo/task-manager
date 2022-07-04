@@ -13,17 +13,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/auth', [\App\Http\Controllers\Auth\AuthenticationController::class, 'authenticate']);
-Route::post('/register', [\App\Http\Controllers\Auth\RegistrationController::class, 'register']);
 
 Route::group([
-    'namespace' => 'App\Http\Controllers\Application'
+    'namespace' => 'App\Http\Controllers'
 ], function () {
+    Route::post('/auth', 'Auth\AuthenticationController@authenticate');
+    Route::post('/register', 'Auth\RegistrationController@register');
+
+    Route::group(['middleware' => ['auth:sanctum']], function () {
+        Route::get('/me', function () {
+            return auth()->user();
+        });
+        Route::post('logout', 'Auth\LogoutController@logout');
+    });
+
     Route::group([
         'prefix' => 'app',
+        'namespace' => 'Application',
         'middleware' => ['auth:sanctum'],
     ], function () {
-        Route::get('/', 'DashboardController');
+        Route::get('/dashboard', 'DashboardController');
     });
 });
 

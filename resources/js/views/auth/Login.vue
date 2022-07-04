@@ -63,8 +63,8 @@ const errors = reactive({
 const auth = (data) => {
     const response = store.dispatch('user/authorise', data)
 
-    response.then(res => {
-        router.push('dashboard')
+    response.then(() => {
+        router.push({name: 'dashboard'})
     }).catch(_errors => {
         Object.assign(errors, _errors.errors)
     })

@@ -14,7 +14,7 @@ class AuthenticationController extends Controller
     /**
      * @throws ValidationException
      */
-    public function authenticate(AuthenticateRequest $request)
+    public function authenticate(AuthenticateRequest $request): \Illuminate\Http\JsonResponse
     {
         $user = User::where('email', $request->email)->first();
 

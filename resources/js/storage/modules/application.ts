@@ -1,4 +1,5 @@
 const state = () => ({
+    drawer: true,
     darkTheme: false,
 })
 
@@ -9,16 +10,28 @@ const mutations = {
                 Object.assign(state, JSON.parse(localStorage.getItem('state')))
             )
         }
+    },
+
+    toggleDarkTheme(state) {
+        state.darkTheme = !state.darkTheme
+    },
+
+    toggleDrawer(state) {
+        state.drawer = !state.drawer
     }
 }
 
 const getters = {
-    darkTheme: (state) => state.darkTheme
+    darkTheme: (state) => state.darkTheme,
+    drawer: (state) => state.drawer
 }
 
 const actions = {
     toggleDarkTheme({commit}) {
-        console.log(commit)
+        commit('toggleDarkTheme')
+    },
+    toggleDrawer({commit}) {
+        commit('toggleDrawer')
     }
 }
 

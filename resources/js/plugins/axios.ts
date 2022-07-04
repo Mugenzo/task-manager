@@ -1,4 +1,14 @@
 import axios from "axios";
+import {router} from "@/router";
+
+axios.interceptors.response.use(response => {
+    return response;
+}, error => {
+    if (error.response.status === 401) {
+        router.push('/login')
+    }
+    return error;
+});
 
 const createHttp = (secured = true) => {
     if (secured) {
@@ -17,6 +27,8 @@ const $http = {
         app.config.globalProperties.$http = () => {
             return createHttp()
         }
+
+        app.provide('http', app.config.globalProperties.$http)
     }
 }
 
