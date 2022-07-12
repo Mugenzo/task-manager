@@ -62,7 +62,7 @@ class ProjectPolicy
      * @param Project $project
      * @return Response
      */
-    public function update(User $user, Project $project)
+    public function update(User $user, Project $project): Response
     {
         return
             $user->roles()->whereIn('title', ['Administrator', 'Manager'])->exists() ||
@@ -76,9 +76,9 @@ class ProjectPolicy
      *
      * @param User $user
      * @param Project $project
-     * @return
+     * @return Response
      */
-    public function delete(User $user, Project $project)
+    public function delete(User $user, Project $project): Response
     {
         return
             $user->roles()->whereIn('title', ['Administrator'])->exists() ||

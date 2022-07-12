@@ -22,6 +22,18 @@ const routes = [
                 path: '/users',
                 name: 'users.index',
                 component: () => import('@/views/pages/Users.vue')
+            },
+            {
+                path: ':project_id',
+                name: 'project',
+                component: () => import('@/views/pages/Project.vue'),
+                children: [
+                    {
+                        path: ':desk_id',
+                        name: 'desk',
+                        component: () => import('@/views/pages/Desk.vue')
+                    }
+                ]
             }
         ]
     }
